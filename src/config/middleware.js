@@ -23,7 +23,7 @@ const sessionOptions = {
 };
 
 const setupMiddleware = (app) => {
-  app.use(express.static(path.resolve("src", "public")));
+  app.use(express.static("public"));
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
