@@ -23,9 +23,10 @@ CREATE TABLE IF NOT EXISTS weekly_reminders (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL,
   subject TEXT NOT NULL, -- Email subject
-  remind_day INTEGER CHECK(remind_day BETWEEN 1 AND 7) NOT NULL, -- Day in 1=Monday and 7=Sunday format
+  remind_day INTEGER CHECK(remind_day BETWEEN 0 AND 6) NOT NULL, -- Day in 0=Sunday and 6=Saturday format
   remind_time TIME NOT NULL, -- Time in HH:MM format
   content TEXT NOT NULL,
+  is_processed BOOLEAN DEFAULT FALSE, -- TRUE when the reminder has been sent
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   UNIQUE(user_id, remind_day, remind_time)
@@ -39,20 +40,20 @@ CREATE TABLE IF NOT EXISTS one_time_reminders (
   remind_date DATE NOT NULL, -- Date in YYYY-MM-DD format
   remind_time TIME NOT NULL, -- Time in HH:MM format
   content TEXT NOT NULL,
+  is_processed BOOLEAN DEFAULT FALSE, -- TRUE when the reminder has been sent
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   UNIQUE(user_id, remind_date, remind_time)
 );
 
-
 -- INDICES FOR PERFORMANCE:
 -- Access Codes Table
-CREATE INDEX idx_access_codes_user_id ON access_codes(user_id);
+CREATE INDEX IF NOT EXISTS idx_access_codes_user_id ON access_codes(user_id);
 
 -- Weekly Reminders Table
-CREATE INDEX idx_weekly_reminders_user_id ON weekly_reminders(user_id);
-CREATE INDEX idx_weekly_reminders_remind_day ON weekly_reminders(remind_day);
+CREATE INDEX IF NOT EXISTS idx_weekly_reminders_user_id ON weekly_reminders(user_id);
+CREATE INDEX IF NOT EXISTS idx_weekly_reminders_remind_day ON weekly_reminders(remind_day);
 
 -- One-Time Reminders Table
-CREATE INDEX idx_one_time_reminders_user_id ON one_time_reminders(user_id);
-CREATE INDEX idx_one_time_reminders_remind_date ON one_time_reminders(remind_date);
+CREATE INDEX IF NOT EXISTS idx_one_time_reminders_user_id ON one_time_reminders(user_id);
+CREATE INDEX IF NOT EXISTS idx_one_time_reminders_remind_date ON one_time_reminders(remind_date);
