@@ -5,7 +5,7 @@ import path from "path";
 const sqlite = sqlite3.verbose();
 const databasePath = path.resolve("app.db");
 
-export const db = new sqlite.Database(databasePath, (error) => {
+const db = new sqlite.Database(databasePath, (error) => {
   if (error) {
     console.error("Failed to connect to SQLite database:", error.message);
   }
@@ -14,7 +14,6 @@ export const db = new sqlite.Database(databasePath, (error) => {
 
 export const initializeDatabase = () => {
   const schemaPath = path.resolve("src", "config", "schema.sql");
-  console.log(schemaPath);
 
   if (!fs.existsSync(schemaPath)) {
     console.error(`Schema file not found at ${schemaPath}`);
