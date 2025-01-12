@@ -1,7 +1,9 @@
-import express from "express";
 import "dotenv/config.js";
+import express from "express";
 import session from "express-session";
 import SQLiteStore from "connect-sqlite3";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import path from "path";
 
 const SQLiteSessionStore = SQLiteStore(session);
@@ -22,8 +24,18 @@ const sessionOptions = {
   },
 };
 
+const rateLimitOptions = {
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+};
+
 const setupMiddleware = (app) => {
-  app.use(express.static("public"));
+  app.use(express.static(path.resolve("public")));
+
+  app.use(helmet());
+  app.use(rateLimit(rateLimitOptions));
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
