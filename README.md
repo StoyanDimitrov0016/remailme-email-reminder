@@ -110,6 +110,34 @@ Additionally, the project includes:
 - **Node-Cron**:  
   Schedules and executes recurring tasks (cron jobs) every minute to check and process due reminders.
 
+## Future Enhancements and Current Limitations
+
+### Multi-Timezone Support
+
+The current version of the application assumes all reminders are based on Bulgarian Time (UTC+2), serving as a unified timezone. This limitation may inconvenience users in different regions or those with varying timezone preferences. Future iterations of the application aim to address this by introducing comprehensive timezone support.
+
+### Proposal
+
+To handle timezone differences effectively and ensure reminders are accurate regardless of the user's location, the following changes are proposed:
+
+- **UTC Normalization**:  
+  Store all `reminder_time` values in UTC format to maintain consistency and prevent timezone discrepancies.
+
+- **Adding `utc_offset`**:
+
+  - Introduce an `utc_offset` column to the reminders table (`weekly_reminders` and `one_time_reminders`) to reflect timezone differences.
+  - Alternatively, store the `utc_offset` in the `users` table for cases where all reminders for a user follow the same timezone preference.
+
+- **Frontend Timezone Detection**:  
+  Use the browser's API (`Intl.DateTimeFormat().resolvedOptions().timeZone`) to extract the user's timezone and map it to a corresponding `utc_offset` value.
+
+- **Custom Time Component**:  
+  Enhance the reminder creation and update forms with a custom time input component that includes timezone selection. This will allow users to specify the exact time and timezone for their reminders in a user-friendly way.
+
+### Markdown Support for Reminder Descriptions
+
+The current version supports plain text for reminder descriptions, which limits formatting options. To improve the user experience, a future enhancement could allow users to use **Markdown** to format their reminder descriptions.
+
 ## License
 
 This project is licensed under the MIT License.
