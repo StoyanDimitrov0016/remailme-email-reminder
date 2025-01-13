@@ -3,3 +3,6 @@ node_modules
 
 app.db
 sessions.sqlite
+
+dist
+-p
