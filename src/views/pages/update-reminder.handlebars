@@ -1,0 +1,102 @@
+<div class="update-reminder page">
+  <h1 class="update-reminder-title">Update Reminder</h1>
+  <form
+    class="update-reminder-form"
+    action="/reminders/{{reminder.id}}/update?type={{type}}"
+    method="POST"
+  >
+    <!-- Subject -->
+    <div class="form-group">
+      <label for="subject" class="form-label">Subject:</label>
+      <input
+        type="text"
+        name="subject"
+        id="subject"
+        class="form-input"
+        placeholder="Enter reminder subject"
+        value="{{reminder.subject}}"
+        required
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="form-group">
+      <label for="content" class="form-label">Content:</label>
+      <textarea
+        name="content"
+        id="content"
+        class="form-input"
+        rows="5"
+        placeholder="Enter reminder content"
+        required
+      >{{reminder.content}}</textarea>
+    </div>
+
+    <!-- Frequency -->
+    <div class="form-group">
+      <label for="frequency" class="form-label">Frequency:</label>
+      <select
+        name="frequency"
+        id="frequency"
+        class="form-input"
+        disabled
+      >
+        <option value="one-time" {{#if isOneTime}}selected{{/if}}>One-Time</option>
+        <option value="weekly" {{#if isWeekly}}selected{{/if}}>Weekly</option>
+      </select>
+    </div>
+
+    <!-- Reminder Type Container -->
+    <div id="options-container">
+      {{#if isOneTime}}
+        <div
+          class="form-group reminder-option reminder-option--one-time"
+          id="one-time-options"
+        >
+          <label for="reminder-date" class="form-label">Date:</label>
+          <input
+            type="date"
+            name="date"
+            id="reminder-date"
+            class="form-input"
+            value="{{reminder.remind_date}}"
+            required
+          />
+        </div>
+      {{/if}}
+      {{#if isWeekly}}
+        <div
+          class="form-group reminder-option reminder-option--weekly"
+          id="weekly-options"
+        >
+          <label for="weekday" class="form-label">Weekday:</label>
+          <!-- "equals" is a helper function from handlebars configuration -->
+          <select name="weekday" id="weekday" class="form-input" required>
+            <option value="1" {{#if (equals reminder.remind_day 1)}}selected{{/if}}>Monday</option>
+            <option value="2" {{#if (equals reminder.remind_day 2)}}selected{{/if}}>Tuesday</option>
+            <option value="3" {{#if (equals reminder.remind_day 3)}}selected{{/if}}>Wednesday</option>
+            <option value="4" {{#if (equals reminder.remind_day 4)}}selected{{/if}}>Thursday</option>
+            <option value="5" {{#if (equals reminder.remind_day 5)}}selected{{/if}}>Friday</option>
+            <option value="6" {{#if (equals reminder.remind_day 6)}}selected{{/if}}>Saturday</option>
+            <option value="7" {{#if (equals reminder.remind_day 7)}}selected{{/if}}>Sunday</option>
+          </select>
+        </div>
+      {{/if}}
+    </div>
+
+    <!-- Time -->
+    <div class="form-group">
+      <label for="time" class="form-label">Time:</label>
+      <input
+        type="time"
+        name="time"
+        id="time"
+        class="form-input"
+        value="{{reminder.remind_time}}"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn">Update Reminder</button>
+  </form>
+</div>

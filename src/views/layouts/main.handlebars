@@ -1,0 +1,38 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/_index.css" />
+    <title>ReMailMe</title>
+    {{#if isCreateReminderPage}}
+      <script src="/js/create-reminder.js" defer></script>
+    {{/if}}
+
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="app-name">
+          <a href="/" aria-label="ReMailMe Home">
+            <img src="/images/logo.png" alt="ReMailMe" class="logo" />
+          </a>
+        </div>
+        {{#if isAuthenticated}}
+          <nav class="app-navigation" aria-label="Main Navigation">
+            <ul>
+              <li><a href="/reminders">My Reminders</a></li>
+              <li><a href="/reminders/new">Create Reminder</a></li>
+              <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+          </nav>
+        {{/if}}
+      </header>
+      <main class="app-main" role="main">
+        {{{body}}}
+      </main>
+      <footer class="app-footer">
+        <p>&copy; {{currentYear}} ReMailMe. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

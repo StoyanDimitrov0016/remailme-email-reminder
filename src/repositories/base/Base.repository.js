@@ -1,19 +1,33 @@
-import DatabaseRepository from "./Database.repository.js";
-
-class BaseRepository extends DatabaseRepository {
-  constructor(database, table) {
-    super(database);
-    this.table = table;
+class BaseRepository {
+  constructor(database) {
+    this.database = database;
   }
 
-  async getById(rowId) {
-    const sql = `SELECT * FROM ${this.table} WHERE id = ?`;
-    return await this.getOneRow(sql, [rowId]);
+  async getOneRow(sql, parameters = []) {
+    return new Promise((resolve, reject) => {
+      this.database.get(sql, parameters, (error, row) => {
+        if (error) return reject(new Error(`Failed to fetch one row: ${error.message}`));
+        resolve(row);
+      });
+    });
   }
 
-  async removeById(rowId) {
-    const sql = `DELETE FROM ${this.table} WHERE id = ?`;
-    return await this.runStatement(sql, [rowId]);
+  async getAllRows(sql, parameters = []) {
+    return new Promise((resolve, reject) => {
+      this.database.all(sql, parameters, (error, rows) => {
+        if (error) return reject(new Error(`Failed to fetch all rows: ${error.message}`));
+        resolve(rows);
+      });
+    });
+  }
+
+  async runStatement(sql, parameters = []) {
+    return new Promise((resolve, reject) => {
+      this.database.run(sql, parameters, function (error) {
+        if (error) return reject(new Error(`Failed to execute statement: ${error.message}`));
+        resolve({ id: this.lastID, changes: this.changes });
+      });
+    });
   }
 }
 

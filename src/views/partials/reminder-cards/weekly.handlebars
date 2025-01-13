@@ -1,0 +1,30 @@
+<article class="reminder-card weekly" aria-label="Weekly Reminder">
+  <!-- Header: Contains the subject of the reminder -->
+  <header class="reminder-header">
+    <h2 class="reminder-title">{{subject}}</h2>
+    <p class="reminder-day-time">
+      <time class="reminder-time" datetime="T{{remind_time}}">
+        will be reminded every
+        {{remind_day}}
+        at
+        {{remind_time}}
+      </time>
+    </p>
+  </header>
+
+  <!-- Main: Contains the content of the reminder -->
+  <div class="reminder-main">
+    <p class="reminder-content">{{content}}</p>
+  </div>
+
+  <!-- Footer: Contains metadata and actions -->
+  <footer class="reminder-footer">
+    <div class="actions">
+      <a href="/reminders/{{id}}/update?type=weekly" class="button">Edit</a>
+
+      <form action="/reminders/{{id}}/delete?type=weekly" method="POST">
+        <button type="submit" class="button delete">Delete</button>
+      </form>
+    </div>
+  </footer>
+</article>

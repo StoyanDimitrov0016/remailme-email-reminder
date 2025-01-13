@@ -1,0 +1,107 @@
+.home.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-medium);
+    padding: var(--space-medium);
+}
+
+.home-header {
+    text-align: center;
+    margin-bottom: var(--space-medium);
+}
+
+.home-title {
+    font-size: calc(var(--font-size-heading) * 1.5);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-medium);
+}
+
+.home-description {
+    font-size: var(--font-size-base);
+    color: var(--color-muted);
+    margin-bottom: var(--space-small);
+}
+
+.auth {
+    background-color: var(--color-primary-light);
+    padding: var(--space-large);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-title {
+    font-size: var(--font-size-heading);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-medium);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.auth-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+}
+
+.auth-form label {
+    font-weight: bold;
+    color: var(--color-secondary);
+}
+
+.auth-form input {
+    padding: var(--space-small);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-muted);
+    border-radius: var(--border-radius);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.auth-form button {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    padding: var(--space-small) var(--space-medium);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-form button:hover {
+    background-color: var(--color-primary-dark);
+    transform: scale(1.05);
+}
+
+.error-message {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    padding: var(--space-small);
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: var(--space-medium);
+    font-size: var(--font-size-small);
+}
+
+@media (max-width: 768px) {
+
+    .home-header,
+    .auth {
+        width: 90%;
+    }
+
+    .home-title {
+        font-size: var(--font-size-large);
+    }
+
+    .auth-title {
+        font-size: var(--font-size-large);
+    }
+}

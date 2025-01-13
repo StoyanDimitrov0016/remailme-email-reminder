@@ -1,0 +1,65 @@
+<div class="home page">
+  <!-- Main Header Section -->
+  <header class="home-header">
+    <div class="main" role="main">
+      <h1 class="home-title">Welcome to ReMailMe</h1>
+      <p class="home-description main-description">
+        Your reliable companion for staying organized and on top of your schedule.
+      </p>
+      <p class="home-description main-description">
+        Manage tasks effortlessly with one-time or recurring reminders.
+      </p>
+    </div>
+  </header>
+
+  <!-- Authentication Form Section -->
+  <main class="auth">
+    <h2 class="auth-title">Access Your Account</h2>
+    <form action="{{formAction}}" method="POST" class="auth-form">
+      <!-- Error Message -->
+      {{#if errorMessage}}
+        <div class="error-message">
+          {{errorMessage}}
+        </div>
+      {{/if}}
+
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          value="{{email}}"
+          required
+        />
+      </div>
+
+      <!-- Authentication Code Input -->
+      {{#if codeHasBeenSent}}
+        <div class="form-group">
+          <label for="code">Authentication Code</label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            placeholder="Enter the code sent to your email"
+            required
+          />
+        </div>
+      {{/if}}
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit">
+          {{#if codeHasBeenSent}}
+            Verify Code
+          {{else}}
+            Send Code
+          {{/if}}
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

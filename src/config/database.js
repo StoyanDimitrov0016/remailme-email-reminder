@@ -5,7 +5,7 @@ import path from "path";
 const sqlite = sqlite3.verbose();
 const databasePath = path.resolve("app.db");
 
-const db = new sqlite.Database(databasePath, (error) => {
+export const db = new sqlite.Database(databasePath, (error) => {
   if (error) {
     console.error("Failed to connect to SQLite database:", error.message);
   }

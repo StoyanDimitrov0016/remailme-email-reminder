@@ -1,0 +1,32 @@
+<article class="reminder-card one-time" aria-label="One-Time Reminder">
+  <!-- Header: Contains the subject of the reminder -->
+  <header class="reminder-header">
+    <h2 class="reminder-title">{{subject}}</h2>
+    <p class="reminder-date-time">
+      <time class="reminder-date" datetime="{{remind_date}}">
+        will be reminded on
+        {{remind_date}}
+      </time>
+      at
+      <time class="reminder-time" datetime="T{{remind_time}}">
+        {{remind_time}}
+      </time>
+    </p>
+  </header>
+
+  <!-- Main: Contains the content of the reminder -->
+  <div class="reminder-main">
+    <p class="reminder-content">{{content}}</p>
+  </div>
+
+  <!-- Footer: Contains metadata and actions -->
+  <footer class="reminder-footer">
+    <div class="actions">
+      <a href="/reminders/{{id}}/update?type=one-time" class="button">Edit</a>
+
+      <form action="/reminders/{{id}}/delete?type=one-time" method="POST">
+        <button type="submit" class="button delete">Delete</button>
+      </form>
+    </div>
+  </footer>
+</article>

@@ -7,6 +7,7 @@ const hbs = create({
   partialsDir: path.join("src", "views", "partials"),
   helpers: {
     currentYear: () => new Date().getFullYear(),
+    equals: (a, b) => a === b,
   },
 });
 

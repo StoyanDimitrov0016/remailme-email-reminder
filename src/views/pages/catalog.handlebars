@@ -1,0 +1,37 @@
+<div class="catalog-page page">
+  <h1>Your Reminders</h1>
+
+  <div class="container">
+    <!-- Weekly Reminders Section -->
+    <section class="reminders weekly" aria-label="Weekly Reminders">
+      <h3>Weekly Reminders</h3>
+      {{#if weeklyReminders.length}}
+        <ul class="reminders-list weekly-reminders">
+          {{#each weeklyReminders}}
+            <li>
+              {{> reminder-cards/weekly}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>You have no weekly reminders yet. Start by adding one for a recurring task or event.</p>
+      {{/if}}
+    </section>
+
+    <!-- One-Time Reminders Section -->
+    <section class="reminders one-time" aria-label="One-Time Reminders">
+      <h3>One-Time Reminders</h3>
+      {{#if oneTimeReminders.length}}
+        <ul class="reminders-list one-time-reminders">
+          {{#each oneTimeReminders}}
+            <li>
+              {{> reminder-cards/one-time}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>You have no one-time reminders yet. Add a reminder for a specific date and time.</p>
+      {{/if}}
+    </section>
+  </div>
+</div>

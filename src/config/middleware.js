@@ -1,18 +1,18 @@
-import "dotenv/config.js";
 import express from "express";
-import session from "express-session";
-import SQLiteStore from "connect-sqlite3";
+import "dotenv/config.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import session from "express-session";
+import SQLiteStore from "connect-sqlite3";
 import path from "path";
 
 const SQLiteSessionStore = SQLiteStore(session);
 
 const sessionOptions = {
   store: new SQLiteSessionStore({
-    db: "sessions.sqlite",
-    dir: "./",
-    table: "sessions",
+    db: "sessions.sqlite", // Separate file for session storage
+    dir: "./", // Directory of app.db (root of the project)
+    table: "sessions", // Table for session storage
   }),
   secret: process.env.SESSION_SECRET || "default_secret",
   resave: false,
@@ -22,19 +22,19 @@ const sessionOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   },
+  unset: "destroy",
 };
 
 const rateLimitOptions = {
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true, // Return rate limit info in `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
 const setupMiddleware = (app) => {
   app.use(express.static(path.resolve("public")));
 
-  app.use(helmet());
   app.use(rateLimit(rateLimitOptions));
 
   app.use(express.json());

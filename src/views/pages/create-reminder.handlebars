@@ -1,0 +1,78 @@
+<div class="create-reminder page">
+  <h1 class="create-reminder-title">Create a Reminder</h1>
+  <form class="create-reminder-form" action="/reminders" method="post">
+    <!-- Subject -->
+    <div class="form-group">
+      <label for="subject" class="form-label">Subject:</label>
+      <input
+        type="text"
+        name="subject"
+        id="subject"
+        class="form-input"
+        placeholder="Enter reminder subject"
+        required
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="form-group">
+      <label for="content" class="form-label">Content:</label>
+      <textarea
+        name="content"
+        id="content"
+        class="form-input"
+        rows="5"
+        placeholder="Enter reminder content"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Frequency -->
+    <div class="form-group">
+      <label for="frequency" class="form-label">Frequency:</label>
+      <select name="frequency" id="frequency" class="form-input" required>
+        <option value="one-time">One-Time</option>
+        <option value="weekly">Weekly</option>
+      </select>
+    </div>
+
+    <!-- Reminder Type Container -->
+    <div id="options-container">
+      <!-- One-Time Options Div -->
+      <div
+        id="one-time-options"
+        class="form-group reminder-option reminder-option--one-time"
+        aria-hidden="false"
+      >
+        <label for="reminder-date" class="form-label">Date:</label>
+        <input type="date" name="date" id="reminder-date" class="form-input" required />
+      </div>
+
+      <!-- Weekly Options Div -->
+      <div
+        id="weekly-options"
+        class="form-group reminder-option reminder-option--weekly"
+        aria-hidden="true"
+      >
+        <label for="weekday" class="form-label">Weekday:</label>
+        <select name="weekday" id="weekday" class="form-input">
+          <option value="1" class="day">Monday</option>
+          <option value="2" class="day">Tuesday</option>
+          <option value="3" class="day">Wednesday</option>
+          <option value="4" class="day">Thursday</option>
+          <option value="5" class="day">Friday</option>
+          <option value="6" class="day">Saturday</option>
+          <option value="7" class="day">Sunday</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Time -->
+    <div class="form-group">
+      <label for="time" class="form-label">Time:</label>
+      <input type="time" name="time" id="time" class="form-input" required />
+    </div>
+
+    <button type="submit" class="btn">Create Reminder</button>
+  </form>
+</div>
